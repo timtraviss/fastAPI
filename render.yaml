@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: pdf-qa-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: PINECONE_API_KEY
+        sync: false
+    healthCheckPath: /health
