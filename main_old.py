@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from fastapi.responses import JSONResponse
 import fitz  # PyMuPDF
 import openai
-import pinecone  # Changed import
+from pinecone import Pinecone
 from uuid import uuid4
 from datetime import datetime
 import hashlib
@@ -56,9 +56,8 @@ try:
     if not pinecone_api_key:
         raise ValueError("Pinecone API key not found")
 
-    # Initialize Pinecone with older API
-    pinecone.init(api_key=pinecone_api_key)
-    index = pinecone.Index("n8npdffiles")
+    pc = Pinecone(api_key=pinecone_api_key)
+    index = pc.Index("n8npdffiles")
 except Exception as e:
     print(f"Failed to initialize APIs: {str(e)}")
     raise
@@ -360,4 +359,4 @@ async def clear_all_files():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000")
+    uvicorn.run(app, host="0.0.0.0", port=8000)
