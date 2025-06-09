@@ -15,6 +15,10 @@ import io
 
 load_dotenv()
 
+# Add this after loading environment variables
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
+print(f"Pinecone API key loaded: {pinecone_api_key[:8]}..." if pinecone_api_key else "No Pinecone API key found")
+
 # Pydantic models for request/response
 class QuestionRequest(BaseModel):
     question: str
