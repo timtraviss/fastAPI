@@ -62,7 +62,7 @@ try:
         raise ValueError("Pinecone API key not found")
 
     # Initialize Pinecone with newer API
-    pc = pinecone(api_key="PINECONE_API_KEY")
+    pc = pinecone.Pinecone(api_key=pinecone_api_key)  # Use the environment variable
     index = pc.Index("n8npdffiles")
 except Exception as e:
     print(f"Failed to initialize APIs: {str(e)}")
