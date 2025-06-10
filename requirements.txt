@@ -3,6 +3,6 @@ uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 PyMuPDF==1.23.8
 openai==1.40.0
-pinecone-client==3.0.0
+pinecone-client==2.2.4
 python-dotenv==1.0.0
 pydantic==2.5.0
