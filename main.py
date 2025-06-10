@@ -16,29 +16,9 @@ import io
 
 load_dotenv()
 
-# Replace the Pinecone initialization section with:
-try:
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    if not openai.api_key:
-        raise ValueError("OpenAI API key not found")
-    
-    pinecone_api_key = os.getenv("PINECONE_API_KEY")
-    if not pinecone_api_key:
-        raise ValueError("Pinecone API key not found")
-
-    # Use the older, stable Pinecone API
-    import pinecone
-    pinecone.init(api_key=pinecone_api_key)
-    index = pinecone.Index("n8npdffiles")
-    
-except Exception as e:
-    print(f"Failed to initialize APIs: {str(e)}")
-    raise
-
-
 # Add this after loading environment variables
-# pinecone_api_key = os.getenv("PINECONE_API_KEY")
-# print(f"Pinecone API key loaded: {pinecone_api_key[:8]}..." if pinecone_api_key else "No Pinecone API key found")
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
+print(f"Pinecone API key loaded: {pinecone_api_key[:8]}..." if pinecone_api_key else "No Pinecone API key found")
 
 # Pydantic models for request/response
 class QuestionRequest(BaseModel):
@@ -82,7 +62,7 @@ try:
         raise ValueError("Pinecone API key not found")
 
     # Initialize Pinecone with newer API
-    pc = Pinecone(api_key=pinecone_api_key)
+    pc = pinecone(api_key=pinecone_api_key)
     index = pc.Index("n8npdffiles")
 except Exception as e:
     print(f"Failed to initialize APIs: {str(e)}")
